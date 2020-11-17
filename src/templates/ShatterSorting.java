@@ -58,39 +58,6 @@ public abstract class ShatterSorting extends Sort {
         Writes.transcribe(array, registers, 0, true, false);
     }
     
-    protected void shatterSort(int[] array, int length, int num) {
-        int shatters = (int) Math.ceil(length / (double) num);
-        
-        shatterPartition(array, length, num);
-        
-        int[] tmp = new int[num];
-        for(int i = 0; i < shatters; i++) {
-            for(int j = 0; j < num; j++) {
-                if(i * num + j >= length)
-                    Writes.write(tmp, j, -1, 0.5, false, true);
-                else
-                    Writes.write(tmp, j, array[i * num + j], 0.5, false, true);
-                
-                Highlights.markArray(2, i * num + j);
-            }
-            
-            Highlights.clearMark(2);
-            
-            for(int j = 0; j < tmp.length; j++) {
-                int tmpj = tmp[j];
-                
-                if(i * num + (tmpj % num) >= length || tmpj == -1) {
-                    break;
-                }
-                
-                Writes.write(array, i * num + (tmpj % num), tmpj, 1, false, false);
-                Highlights.markArray(1, i * num + (tmpj % num));
-            }
-            
-            Highlights.clearMark(1);
-        }
-    }
-    
     protected void simpleShatterSort(int[] array, int length, int num, int rate) {
         for(int i = num; i > 1; i = i / rate) {
             shatterPartition(array, length, i);

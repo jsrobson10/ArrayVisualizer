@@ -7,6 +7,9 @@ import utils.Delays;
 import utils.Highlights;
 import utils.Shuffles;
 import utils.Writes;
+import utils.Lines;
+
+import java.lang.Math;
 
 /*
  * 
@@ -46,7 +49,9 @@ final public class ArrayManager {
     private Highlights Highlights;
     private Shuffles Shuffles;
     private Writes Writes;
-    
+
+    private Lines Lines = utils.Lines.FLAT;
+
     public ArrayManager(ArrayVisualizer arrayVisualizer) {
         this.ArrayVisualizer = arrayVisualizer;
         this.presortedArray = new int[ArrayVisualizer.getMaximumLength()];
@@ -57,7 +62,7 @@ final public class ArrayManager {
         this.Delays = ArrayVisualizer.getDelays();
         this.Highlights = ArrayVisualizer.getHighlights();
         this.Writes = ArrayVisualizer.getWrites();
-        
+
         this.MUTABLE = true;
     }
     
@@ -67,13 +72,30 @@ final public class ArrayManager {
     public void toggleMutableLength(boolean Bool) {
         this.MUTABLE = Bool;
     }
+
+	private double squared(double a) {
+		return a * a;
+	}
  
     //TODO: Fix minimum to zero
     public void initializeArray(int[] array) {
-        int equalFactor = ArrayVisualizer.getEqualItems();
-        for (int i = 0; i < array.length; i++) {
-            array[i] = (i / equalFactor) * equalFactor;
-        }
+		int currentLen = ArrayVisualizer.getCurrentLength();
+
+		for(int i = 0; i < array.length; i++)
+		{
+			switch(this.Lines)
+			{
+				case FLAT:
+					array[i] = i;
+					break;
+				case SQRT:
+					array[i] = (int)(Math.sqrt((double) i / currentLen) * currentLen);
+					break;
+				case EXP:
+					array[i] = (int)(squared((double) i / currentLen) * currentLen);
+					break;
+			}
+		}
     }
     
     public void initializePresortedArray() {

@@ -123,7 +123,6 @@ final public class ArrayFrame extends javax.swing.JFrame {
                 if(ArrayManager.isLengthMutable()) {
                     ArrayVisualizer.setCurrentLength((int) Math.pow(2, jSlider.getValue()));
                     //ArrayVisualizer.setEqualItems((int) Math.pow(2, jSlider.getValue()));
-                    ArrayManager.initializeArray(array);
                 }
                 else jSlider.setValue(ArrayVisualizer.getLogBaseTwoOfLength());
                 if(ArrayVisualizer.getVisualStyles() == visuals.VisualStyles.CIRCULAR && jSlider.getValue() == 1) jSlider.setValue(2);

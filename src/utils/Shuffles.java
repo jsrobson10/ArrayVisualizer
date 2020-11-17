@@ -37,7 +37,7 @@ public enum Shuffles {
         @Override
         public void shuffleArray(int[] array, ArrayVisualizer ArrayVisualizer, Delays Delays, Highlights Highlights, Writes Writes) {
             int currentLen = ArrayVisualizer.getCurrentLength();
-            
+
             //TODO: Consider separate method
             for(int i = 0; i < currentLen; i++){
                 int randomIndex = (int) (Math.random() * (currentLen - i)) + i;

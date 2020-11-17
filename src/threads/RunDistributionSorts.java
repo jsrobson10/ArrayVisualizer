@@ -11,7 +11,6 @@ import sorts.LSDRadixSort;
 import sorts.MSDRadixSort;
 import sorts.PigeonholeSort;
 import sorts.RecursiveBinaryQuickSort;
-import sorts.ShatterSort;
 import sorts.SimpleShatterSort;
 import sorts.TimeSort;
 import templates.JErrorPane;
@@ -55,13 +54,12 @@ final public class RunDistributionSorts extends MultipleSortThread {
     private Sort FlashSort;
     private Sort BinaryQuickSort;
     private Sort RecursiveBinaryQuickSort;
-    private Sort ShatterSort;
     private Sort SimpleShatterSort;
     private Sort TimeSort;
     
     public RunDistributionSorts(ArrayVisualizer ArrayVisualizer) {
         super(ArrayVisualizer);
-        this.sortCount = 13;
+        this.sortCount = 12;
         this.categoryCount = this.sortCount;
         
         CountingSort             = new             CountingSort(Delays, Highlights, Reads, Writes);
@@ -74,7 +72,6 @@ final public class RunDistributionSorts extends MultipleSortThread {
         FlashSort                = new                FlashSort(Delays, Highlights, Reads, Writes);
         BinaryQuickSort          = new          BinaryQuickSort(Delays, Highlights, Reads, Writes);
         RecursiveBinaryQuickSort = new RecursiveBinaryQuickSort(Delays, Highlights, Reads, Writes);
-        ShatterSort              = new              ShatterSort(Delays, Highlights, Reads, Writes);
         SimpleShatterSort        = new        SimpleShatterSort(Delays, Highlights, Reads, Writes);
         TimeSort                 = new                 TimeSort(Delays, Highlights, Reads, Writes);
     }
@@ -93,7 +90,6 @@ final public class RunDistributionSorts extends MultipleSortThread {
         RunDistributionSorts.this.runIndividualSort(FlashSort,                0, array, 2048, 1);
         RunDistributionSorts.this.runIndividualSort(BinaryQuickSort,          0, array, 2048, 1);
         RunDistributionSorts.this.runIndividualSort(RecursiveBinaryQuickSort, 0, array, 2048, 1);
-        RunDistributionSorts.this.runIndividualSort(ShatterSort,            128, array, 2048, 1);
         RunDistributionSorts.this.runIndividualSort(SimpleShatterSort,      128, array, 2048, 1);
         RunDistributionSorts.this.runIndividualSort(TimeSort,                10, array, 2048, 1);
     }
